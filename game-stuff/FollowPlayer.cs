@@ -5,13 +5,11 @@ using UnityEngine;
 public class FollowPlayer : MonoBehaviour
 {
     public Transform player;
-    // Set the camera offset Z value to -10 or lower
     public Vector3 cameraOffset;
     public float cameraSpeed = 0.1f;
 
     private void Awake()
     {
-        // Change the ("Player") to the name of the thing you want the camera follow
         player = GameObject.Find("Player").GetComponent<Transform>();
     }
 
