@@ -13,19 +13,26 @@ public class Gameloop : MonoBehaviour
     public GameObject lightningEnemy;
     public GameObject tankEnemy;
     public GameObject suicideEnemy;
+    public GameObject imposterEnemy;
+    public GameObject pinkyEnemy;
+    public GameObject lightningTankEnemy;
 
+    [Header("Enemy Settings")]
     public float easySpawnRate;
     public float harderSpawnRate;
-    public float suicideSpawnRate;
+    public float thirdSpawnRate;
+    public float hardestSpawnRate;
 
     public int timeBeforeEasySpawn;
     public int timeBeforeHarderSpawn;
-    public int timeBeforeSuicideSpawn;
+    public int timeBeforeThirdSpawn;
+    public int timeBeforeHardestSpawn;
 
     [Header("Game Storage Information")]
     public int place;
     public int types;
 
+    [Header("Vector Values")]
     public Vector2 places1 = new Vector2(-200, 200);
     public Vector2 places2 = new Vector2(200, 180);
 
@@ -48,7 +55,8 @@ public class Gameloop : MonoBehaviour
 
        InvokeRepeating("ezDiff", timeBeforeEasySpawn, easySpawnRate);
        InvokeRepeating("harderDiff", timeBeforeHarderSpawn, harderSpawnRate);
-       InvokeRepeating("suicideDiff", timeBeforeSuicideSpawn, suicideSpawnRate);
+       InvokeRepeating("thirdDiff", timeBeforeThirdSpawn, thirdSpawnRate);
+       InvokeRepeating("hardestDiff", timeBeforeHardestSpawn, hardestSpawnRate);
     }
 
     public void ezDiff()
@@ -111,7 +119,7 @@ public class Gameloop : MonoBehaviour
         }
     }
 
-    public void suicideDiff()
+    public void thirdDiff()
     {
         place = Random.Range(0, 2);
         types = Random.Range(0, 2);
@@ -124,7 +132,7 @@ public class Gameloop : MonoBehaviour
 
             if (types == 1)
             {
-                Instantiate(suicideEnemy, new Vector3(Random.Range(places1.x, places2.x), Random.Range(places1.y, places2.y), 0), Quaternion.identity);
+                Instantiate(imposterEnemy, new Vector3(Random.Range(places1.x, places2.x), Random.Range(places1.y, places2.y), 0), Quaternion.identity);
             }
         }
         else if (place == 1)
@@ -136,7 +144,37 @@ public class Gameloop : MonoBehaviour
 
             if (types == 1)
             {
-                Instantiate(suicideEnemy, new Vector3(Random.Range(places3.x, places2.x), Random.Range(places4.y, places4.y), 0), Quaternion.identity);
+                Instantiate(imposterEnemy, new Vector3(Random.Range(places3.x, places2.x), Random.Range(places4.y, places4.y), 0), Quaternion.identity);
+            }
+        }
+    }
+
+    public void hardestDiff()
+    {
+        place = Random.Range(0, 2);
+        types = Random.Range(0, 2);
+        if (place == 0)
+        {
+            if (types == 0)
+            {
+                Instantiate(pinkyEnemy, new Vector3(Random.Range(places1.x, places2.x), Random.Range(places1.y, places2.y), 0), Quaternion.identity);
+            }
+
+            if (types == 1)
+            {
+                Instantiate(lightningTankEnemy, new Vector3(Random.Range(places1.x, places2.x), Random.Range(places1.y, places2.y), 0), Quaternion.identity);
+            }
+        }
+        else if (place == 1)
+        {
+            if (types == 0)
+            {
+                Instantiate(pinkyEnemy, new Vector3(Random.Range(places3.x, places4.x), Random.Range(places3.y, places4.y), 0), Quaternion.identity);
+            }
+
+            if (types == 1)
+            {
+                Instantiate(lightningTankEnemy, new Vector3(Random.Range(places3.x, places2.x), Random.Range(places4.y, places4.y), 0), Quaternion.identity);
             }
         }
     }
